@@ -1,0 +1,30 @@
+- hosts: all
+  become: true
+  roles: 
+    - geerlingguy.swap
+    - geerlingguy.docker
+    - geerlingguy.kubernetes
+    - geerlingguy.helm
+  tags:
+    - k8s
+    - k8s::install
+
+- hosts: master
+  become: true
+  tasks:
+    - name: install python lib 
+      apt:
+        name: setuptools
+        state: present
+  tags:
+    - k8s
+    - k8s::config
+
+- hosts: master
+  become: true
+  roles:
+
+    - geerlingguy.k8s_manifests
+  tags:
+    - k8s
+    - k8s::config

@@ -1,0 +1,16 @@
+# Disable Swap
+swap_file_state: absent
+
+# Docker Configuration
+docker_edition: 'ce'
+docker_package: "docker-{{ docker_edition }}"
+docker_package_state: present
+docker_service_state: started
+docker_service_enabled: true
+docker_restart_handler_state: restarted
+
+#Kubernetes Configuration
+kubernetes_kubelet_extra_args: "--node-ip={{ ansible_host }}"
+kubernetes_allow_pods_on_master: false
+kubernetes_enable_web_ui: true
+kubernetes_web_ui_manifest_file: https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml

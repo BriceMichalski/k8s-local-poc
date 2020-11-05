@@ -1,0 +1,12 @@
+kubernetes_role: master
+kubernetes_apiserver_advertise_address: "{{ ansible_ssh_host }}"
+k8s_manage_namespace: false
+k8s_manifests:
+  - dir: https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.4/aio/deploy/recommended.yaml
+    namespace: system
+
+pip_install_packages:
+  - name: setuptools
+    version: latest
+  - name: openshift
+    version: latest
